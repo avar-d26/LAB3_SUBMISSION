@@ -432,7 +432,7 @@ begin
 end process right_audio_update;  
 
 ----------------------------------------------------------------------------
--- Update s00_axis_tready --> ask if we need to delay this! of will this be an insane combinational delay
+-- Update s00_axis_tready 
 s00_axis_tready <= s00_axis_tready_sig;
 
 ----------------------------------------------------------------------------

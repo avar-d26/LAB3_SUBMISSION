@@ -21,8 +21,8 @@ entity axis_i2s_wrapper is
 	    ----------------------------------------------------------------------------
 		-- Users to add parameters here
 		DDS_DATA_WIDTH : integer := 24;         -- DDS data width
-        DDS_PHASE_DATA_WIDTH : integer := 12;   -- DDS phase increment data width
-        ----------------------------------------------------------------------------
+        	DDS_PHASE_DATA_WIDTH : integer := 12;   -- DDS phase increment data width
+        	----------------------------------------------------------------------------
 
 		-- User parameters ends
 		-- Do not modify the parameters beyond this line
@@ -38,11 +38,11 @@ entity axis_i2s_wrapper is
 		
         ----------------------------------------------------------------------------
         -- I2S audio codec ports		
-		-- User controls
-		--ac_mute_en_i : in STD_LOGIC; -- FOR TASK 2
-		audio_input_sel_i : in STD_LOGIC;
+	-- User controls
+	--ac_mute_en_i : in STD_LOGIC; -- FOR TASK 2
+	audio_input_sel_i : in STD_LOGIC;
 		
-		-- Audio Codec I2S controls
+	-- Audio Codec I2S controls
         ac_bclk_o : out STD_LOGIC;
         ac_mclk_o : out STD_LOGIC;
         ac_mute_n_o : out STD_LOGIC;	-- Active Low
@@ -150,8 +150,8 @@ component i2s_clk_gen is
     Port (
 
         -- System clock in
-		sysclk_125MHz_i   : in  std_logic;	
-		--mclk_i    : in std_logic;
+		sysclk_125MHz_i   : in  std_logic; -- sysclk is actually now 100 MHz	
+		--mclk_i    : in std_logic; -- Toggle for when we remove clock wizard from I2S Clock Gen
 		
 		-- Forwarded clocks
 		mclk_fwd_o		  : out std_logic;	
@@ -173,7 +173,7 @@ component i2s_receiver is
     Generic (AC_DATA_WIDTH : integer := AC_DATA_WIDTH);
     Port (
 
-        -- Timing
+        	-- Timing
 		mclk_i    : in std_logic;	
 		bclk_i    : in std_logic;	
 		lrclk_i   : in std_logic;
@@ -190,8 +190,8 @@ component engs128_axi_dds is
 	    ----------------------------------------------------------------------------
 		-- Users to add parameters here
 		DDS_DATA_WIDTH : integer := 24;         -- DDS data width
-        DDS_PHASE_DATA_WIDTH : integer := 12;   -- DDS phase increment data width
-        ----------------------------------------------------------------------------
+        	DDS_PHASE_DATA_WIDTH : integer := 12;   -- DDS phase increment data width
+        	----------------------------------------------------------------------------
 
 		-- User parameters ends
 		-- Do not modify the parameters beyond this line
@@ -247,7 +247,7 @@ component i2s_transmitter is
     Generic (AC_DATA_WIDTH : integer := AC_DATA_WIDTH);
     Port (
 
-        -- Timing
+        	-- Timing
 		mclk_i    : in std_logic;	
 		bclk_i    : in std_logic;	
 		lrclk_i   : in std_logic;

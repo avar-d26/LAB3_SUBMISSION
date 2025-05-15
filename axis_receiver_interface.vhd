@@ -60,17 +60,13 @@ floppa: process(s00_axis_aclk_i) begin
     lrclk_reg <= lrclk_i;
     lrclk_main <= lrclk_reg;
 end process;
+
 ----------------------------------------------------------------------------
 -- State machine
 ----------------------------------------------------------------------------
+
 -- FSM Next State Logic (asynchronous, no clock)
--- Include all state change triggering signals in the sensitivity list
--- The only signal getting assigned in this process should be next_state
-
-
 next_state_logic : process(curr_state, lrclk_main)
--- ++++ Add necessary signals to the sensitivity list above ++++
--- ++++ Modify next state logic to match your paper design ++++
 begin
 
 	-- Default conditions
@@ -108,8 +104,6 @@ end process next_state_logic;
 
 ----------------------------------------------------------------------------
 -- FSM Output Logic Process (asynchronous, no clock)
--- Only the current state signal (curr_state) should be in the sensitivity list
--- FSM "outputs" are simply signals or ports that are assigned by the FSM state logic
 fsm_output_logic : process(curr_state, s00_axis_tdata_i) 
 begin
 
@@ -145,8 +139,6 @@ s00_axis_tready_sig <= '0';
         when others => 
         
     end case;
-
-
 end process fsm_output_logic;
 
 ----------------------------------------------------------------------------
@@ -171,7 +163,7 @@ begin
     end if;
 end process s00_data_update; 
 
--- update tvalid and treadys
+-- update left and right tvalids when sending left and right audio data
 valid_tready_updates : process (send_left, send_right)
 begin 
     left_audio_data_valid_sig <= '0';
@@ -185,7 +177,7 @@ begin
 
 end process valid_tready_updates; 
 
--- register for tready and tvalids
+-- register for tready and tvalids to properly time assertions
 tready_tvalid_regs : process (s00_axis_aclk_i)
 begin 
     if (rising_edge(s00_axis_aclk_i)) then
